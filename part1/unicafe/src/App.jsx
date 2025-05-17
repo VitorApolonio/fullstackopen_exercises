@@ -9,9 +9,9 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={() => setGood(good + 1)}>good</button>
-      <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
-      <button onClick={() => setBad(bad + 1)}>bad</button>
+      <Button setterFn={() => setGood(good + 1)} text='good' />
+      <Button setterFn={() => setNeutral(neutral + 1)} text='neutral' />
+      <Button setterFn={() => setBad(bad + 1)} text='bad' />
       <h1>statistics</h1>
       <Statistics good={good} bad={bad} neutral={neutral} />
     </div>
@@ -24,15 +24,15 @@ const Statistics = ({ good, neutral, bad }) => {
   } else {
     return (
       <>
-        <Counter text='good' count={good} />
-        <Counter text='neutral' count={neutral} />
-        <Counter text='bad' count={bad} />
+        <StatisticLine text='good' value={good} />
+        <StatisticLine text='neutral' value={neutral} />
+        <StatisticLine text='bad' value={bad} />
 
-        <Counter text='all' count={good + bad + neutral} />
-        <Counter text='average' count={
+        <StatisticLine text='all' value={good + bad + neutral} />
+        <StatisticLine text='average' value={
             (good * 1 + neutral * 0 + bad * -1) / (good + bad + neutral)
         } />
-        <Counter text='positive' count={
+        <StatisticLine text='positive' value={
             good / (good + bad + neutral) * 100 + ' %'
         } />
       </>
@@ -40,9 +40,15 @@ const Statistics = ({ good, neutral, bad }) => {
   }
 }
 
-const Counter = (props) => {
+const Button = (props) => {
   return (
-    <p>{props.text} {props.count}</p>
+    <button onClick={props.setterFn}>{props.text}</button>
+  )
+}
+
+const StatisticLine = (props) => {
+  return (
+    <p>{props.text} {props.value}</p>
   )
 }
 
