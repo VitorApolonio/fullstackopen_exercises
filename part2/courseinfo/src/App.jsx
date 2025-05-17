@@ -17,11 +17,21 @@ const Course = ({ course }) => {
     <div>
       <Header course={course.name} />
       <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   )
 }
 
-const Total = (props) => <p>Number of exercises {props.total}</p>
+const Total = ({ parts }) => {
+  const total = parts.map(p => p.exercises).reduce((acc, cur) => acc + cur)
+  return (
+    <>
+      <strong>
+        total of {total} exercises
+      </strong>
+    </>
+  )
+}
 
 const App = () => {
   const course = {
