@@ -19,25 +19,25 @@ const App = () => {
 }
 
 const Statistics = ({ good, neutral, bad }) => {
-  return (
-    <>
-      <Counter text='good' count={good} />
-      <Counter text='neutral' count={neutral} />
-      <Counter text='bad' count={bad} />
+  if (good + bad + neutral === 0) {
+    return 'No feedback given'
+  } else {
+    return (
+      <>
+        <Counter text='good' count={good} />
+        <Counter text='neutral' count={neutral} />
+        <Counter text='bad' count={bad} />
 
-      <Counter text='all' count={good + bad + neutral} />
-      <Counter text='average' count={
-          (good + bad + neutral) === 0
-          ? 0
-          : (good * 1 + neutral * 0 + bad * -1) / (good + bad + neutral)
-      } />
-      <Counter text='positive' count={
-          (good + bad + neutral) === 0
-          ? '0 %'
-          : good / (good + bad + neutral) * 100 + ' %'
-      } />
-    </>
-  )
+        <Counter text='all' count={good + bad + neutral} />
+        <Counter text='average' count={
+            (good * 1 + neutral * 0 + bad * -1) / (good + bad + neutral)
+        } />
+        <Counter text='positive' count={
+            good / (good + bad + neutral) * 100 + ' %'
+        } />
+      </>
+    )
+  }
 }
 
 const Counter = (props) => {
