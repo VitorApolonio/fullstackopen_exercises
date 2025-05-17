@@ -28,6 +28,7 @@ const App = () => {
       <button onClick={addGoodFb}>good</button>
       <button onClick={addNeutralFb}>neutral</button>
       <button onClick={addBadFb}>bad</button>
+      <h1>statistics</h1>
       <Counter text='good' count={good} />
       <Counter text='neutral' count={neutral} />
       <Counter text='bad' count={bad} />
