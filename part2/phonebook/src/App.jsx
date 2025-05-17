@@ -8,10 +8,14 @@ const App = () => {
 
   const addPerson = (evt) => {
     evt.preventDefault()
-    const newPerson = {
-      name: newName,
+    if (persons.map(p => p.name).includes(newName)) {
+      alert(`${newName} has already been added.`)
+    } else {
+      const newPerson = {
+        name: newName,
+      }
+      setPersons(persons.concat(newPerson))
     }
-    setPersons(persons.concat(newPerson))
   }
 
   return (
