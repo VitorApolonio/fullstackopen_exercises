@@ -1,4 +1,4 @@
-const Persons = ({ personList, filter }) => {
+const Persons = ({ personList, filter, deleteFn }) => {
   return (
     <table>
       <tbody>
@@ -10,6 +10,9 @@ const Persons = ({ personList, filter }) => {
           <tr key={p.id}>
             <td>{p.name}</td>
             <td>{p.number}</td>
+            <td>
+              <button onClick={() => deleteFn(p.id)}>delete</button>
+            </td>
           </tr>
         ))}
       </tbody>

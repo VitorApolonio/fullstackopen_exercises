@@ -26,6 +26,19 @@ const App = () => {
       })
   }
 
+  const delPerson = (id) => {
+    const name = persons.find(p => p.id == id).name
+    const sure = confirm(`Are you sure you want to delete ${name}?`)
+
+    if (sure) {
+      personService
+        .remove(id)
+        .then(() => {
+          setPersons(persons.filter(p => p.id != id))
+        })
+    }
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -33,7 +46,7 @@ const App = () => {
       <h2>add new</h2>
       <PersonForm personList={persons} updateFn={addPerson} />
       <h2>Numbers</h2>
-      <Persons personList={persons} filter={filter} />
+      <Persons personList={persons} filter={filter} deleteFn={delPerson} />
     </div>
   )
 }

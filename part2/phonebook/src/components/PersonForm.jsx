@@ -12,7 +12,7 @@ const PersonForm = ({ personList, updateFn }) => {
       const newPerson = {
         name: newName.trim(),
         number: newNumber,
-        id: String(personList.length + 1),
+        id: crypto.randomUUID(),
       }
       if (newPerson.name && newPerson.number) {
         updateFn(newPerson)
