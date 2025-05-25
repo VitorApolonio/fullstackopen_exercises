@@ -6,19 +6,15 @@ const PersonForm = ({ personList, updateFn }) => {
 
   const submitFn = (evt) => {
     evt.preventDefault()
-    if (personList.map(p => p.name).includes(newName.trim())) {
-      alert(`${newName.trim()} has already been added.`)
-    } else {
-      const newPerson = {
-        name: newName.trim(),
-        number: newNumber,
-        id: crypto.randomUUID(),
-      }
-      if (newPerson.name && newPerson.number) {
-        updateFn(newPerson)
-        setNewName('')
-        setNewNumber('')
-      }
+    const newPerson = {
+      name: newName.trim(),
+      number: newNumber,
+      id: crypto.randomUUID(),
+    }
+    if (newPerson.name && newPerson.number) {
+      updateFn(newPerson)
+      setNewName('')
+      setNewNumber('')
     }
   }
 
