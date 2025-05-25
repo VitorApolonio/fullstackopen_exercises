@@ -5,6 +5,7 @@ import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 
 import axios from 'axios'
+const baseUrl = 'http://localhost:3001/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -20,7 +21,9 @@ const App = () => {
   }, [])
 
   const addPerson = (person) => {
-    setPersons(persons.concat(person))
+    axios.post(baseUrl, person).then(response => {
+      setPersons(persons.concat(response.data))
+    })
   }
 
   return (
