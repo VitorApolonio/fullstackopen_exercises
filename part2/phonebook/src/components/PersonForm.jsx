@@ -14,7 +14,11 @@ const PersonForm = ({ personList, updateFn }) => {
         number: newNumber,
         id: String(personList.length + 1),
       }
-      updateFn(newPerson)
+      if (newPerson.name && newPerson.number) {
+        updateFn(newPerson)
+        setNewName('')
+        setNewNumber('')
+      }
     }
   }
 

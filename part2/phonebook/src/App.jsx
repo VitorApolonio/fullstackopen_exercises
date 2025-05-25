@@ -4,26 +4,26 @@ import Search from './components/Search'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 
-import axios from 'axios'
-const baseUrl = 'http://localhost:3001/persons'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons")
+    personService
+      .getAll()
       .then(response => {
-        console.log("response ok")
-        setPersons(response.data)
+        setPersons(response)
       })
-    console.log("effect")
   }, [])
 
   const addPerson = (person) => {
-    axios.post(baseUrl, person).then(response => {
-      setPersons(persons.concat(response.data))
-    })
+    personService
+      .create(person)
+      .then(response => {
+        setPersons(persons.concat(response))
+      })
   }
 
   return (
