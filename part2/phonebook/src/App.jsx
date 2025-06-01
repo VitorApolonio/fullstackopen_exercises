@@ -33,13 +33,14 @@ const App = () => {
             setPersons(persons.map(p => p.id === id ? newP : p))
             setSuccess(true)
             setMessage(`Updated ${newP.name}'s phone number.`)
-            setTimeout(() => setMessage(''), 5000)
           })
           .catch(e => {
             setSuccess(false)
             setMessage(`Contact ${newP.name} not found on phonebook.`)
-            setTimeout(() => setMessage(''), 5000)
           })
+          .finally(
+            setTimeout(() => setMessage(''), 5000)
+          )
       }
     } else {
       personService
