@@ -3,12 +3,15 @@ import { useState, useEffect } from 'react'
 import Search from './components/Search'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [filter, setFilter] = useState('')
+  const [message, setMessage] = useState('')
+  const [success, setSuccess] = useState(false)
 
   useEffect(() => {
     personService
@@ -28,6 +31,9 @@ const App = () => {
           .update(id, newP)
           .then(response => {
             setPersons(persons.map(p => p.id === id ? newP : p))
+            setSuccess(true)
+            setMessage(`Updated ${newP.name}'s phone number.`)
+            setTimeout(() => setMessage(''), 5000)
           })
       }
     } else {
@@ -35,6 +41,9 @@ const App = () => {
         .create(person)
         .then(response => {
           setPersons(persons.concat(response))
+          setSuccess(true)
+          setMessage(`Added ${response.name} to phonebook.`)
+          setTimeout(() => setMessage(''), 5000)
         })
     }
   }
@@ -54,6 +63,7 @@ const App = () => {
 
   return (
     <div>
+      <Notification message={message} success={success} />
       <h2>Phonebook</h2>
       <Search onChange={e => setFilter(e.target.value)} value={filter} />
       <h2>add new</h2>
