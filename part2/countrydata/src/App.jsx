@@ -22,12 +22,16 @@ const App = () => {
     setCountry(evt.target.value)
   }
 
+  const filter = (evt) => {
+    setCountryList(countryList.filter(c => c.ccn3 === evt.target.id))
+  }
+
   return (
     <div>
       <p>find countries <input onChange={handleChange} type='text'/></p>
       {
         countryList.length > 1 || countryList.length === 0
-          ? <MatchList countries={countryList} />
+          ? <MatchList showHandler={filter} countries={countryList} />
           : <CountryPage country={countryList[0]} />
       }
     </div>
