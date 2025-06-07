@@ -8,12 +8,8 @@ const Notification = ({ message, success }) => {
     padding: '10px',
   }
 
-  const styleSuccess = Object.assign({
-    color: 'green',
-  }, styleBase)
-  const styleFailure = Object.assign({
-    color: 'red',
-  }, styleBase)
+  const styleSuccess = { ...styleBase, color: 'green' }
+  const styleFailure = { ...styleBase, color: 'red' }
 
   return (
     message
