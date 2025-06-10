@@ -71,6 +71,12 @@ app.post('/api/persons', (req, res) => {
     })
   }
 
+  if (persons.map(p => p.name).includes(body.name)) {
+    return res.status(400).json({
+      error: 'name already registered'
+    })
+  }
+
   const person = {
     id: genId().toString(),
     name: body.name,
